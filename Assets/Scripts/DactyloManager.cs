@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class DactyloManager : MonoBehaviour
 {
     [SerializeField]
+    private int numberOfSuccessToWin = 3;
+
+    [SerializeField]
     private string[] wordList;
     private string wordToCopy;
     private int wordPosition; //Position dans le mot à recopier
@@ -13,9 +16,8 @@ public class DactyloManager : MonoBehaviour
 
     [SerializeField]
     private GameObject LetterPrefab;
-
-    public int successNeeded = 3;
     private int currentSuccess;
+
 
     [SerializeField]
     private InputField inputF;
@@ -38,13 +40,16 @@ public class DactyloManager : MonoBehaviour
         // Event qui appelle OnInputValueChange à chaque changement de valeur
         inputF.onValueChanged.AddListener(delegate { OnInputValueChange(); });
 
-        if (Input.anyKey && !win && inputF.text != "")
+        // Au cas où le clique fasse perdre le focus, on le récupère
+        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
         {
-            CheckIfValid();
+            inputF.Select();
+            inputF.ActivateInputField();
         }
-
     }
 
+    // Fonction qui initialise le mot que ce soit à l'écran ou dans la hiérarchie
+    // Reset la position dans le mot
     void InitNewWord()
     {
         EmptyPreviousLetters();
@@ -59,12 +64,11 @@ public class DactyloManager : MonoBehaviour
         int value = Random.Range(0, wordList.Length - 1);
         wordToCopy = wordList[value].ToUpper();
 
-        //wordToCopy.text = wordList[value];
-
         InstantiateLetters();
-
     }
 
+    // Fonction qui détruit les prefabs de lettre dans la hiérarchie 
+    // Appelée quand un mot est initialisé
     void EmptyPreviousLetters()
     {
         foreach(Transform child in GameObject.Find("WordToCopy").transform)
@@ -73,6 +77,7 @@ public class DactyloManager : MonoBehaviour
         }
     }
 
+    // Fonction qui instancie les prefabs de lettre dans l'UI
     void InstantiateLetters()
     {
         letters.Clear();
@@ -89,17 +94,27 @@ public class DactyloManager : MonoBehaviour
 
     }
 
+    // Fonction appelée lorsque l'évènement "onValueChange" de l'inputfield est déclenché
     void OnInputValueChange()
     {
         TransformToUpperCase();
+
+        // Vérification afin que la fonction ne soit pas appelée plusieurs fois (défaut de onValueChange, c'est pas précis)
+        if (!win && inputF.text != "")
+        {
+            CheckIfValid();
+        }
     }
 
-    // Fonction qui passe le texte de l'input en majuscule a chaque changement
+    // Fonction qui passe le texte de l'input en majuscule
     void TransformToUpperCase()
     {
         inputF.text = inputF.text.ToUpper();
     }
 
+
+    // Fonction qui vérifie la valididité de l'input à chaque entrée
+    // Vérifie également la condition de victoire
     void CheckIfValid()
     {
         if (inputF.text == wordToCopy[wordPosition].ToString()) 
@@ -111,7 +126,7 @@ public class DactyloManager : MonoBehaviour
             if(wordPosition == wordToCopy.Length)
             {
                 AddSuccess();
-                if (currentSuccess < 3)
+                if (currentSuccess < numberOfSuccessToWin)
                 {
                     InitNewWord();
                 }
@@ -137,41 +152,9 @@ public class DactyloManager : MonoBehaviour
         }
 
         inputF.text = "";
-
-        /*
-        if(inputF.text == wordToCopy && currentSuccess < 3)
-        {
-            Debug.Log("Mot Valide");
-            inputF.DeactivateInputField();
-
-            if(currentSuccess < 3)
-            {
-                AddSuccess();
-                InitNewWord();
-            }
-            else
-            {
-                currentSuccess++;
-                // Do Something
-                Debug.Log("C'est Win");
-            }
-        }
-        */
     }
 
-    string getCurrentProgression(int length)
-    {
-        string res = "";
-        for(int i = 0; i < length; i++)
-        {
-            res += wordToCopy[i].ToString();
-        }
-
-        Debug.Log(res);
-        return res;
-    }
-
-    // Ajoute un au nombre de succès
+    // Fonction qui ajoute un au nombre de succès
     void AddSuccess()
     {
         currentSuccess++;
