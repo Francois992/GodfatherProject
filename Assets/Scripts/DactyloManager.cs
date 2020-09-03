@@ -15,7 +15,12 @@ public class DactyloManager : MiniGame
     [SerializeField]
     private string[] wordList;
     private string wordToCopy;
-    private int wordPosition; //Position dans le mot à recopier
+
+    // Pour tester si le nouveau mot est différent du précédent
+    private bool wordInList = true;
+    private string[] previousWords;
+
+    private int wordPosition; // Position dans le mot à recopier
     private bool win;
 
     [SerializeField]
@@ -42,6 +47,7 @@ public class DactyloManager : MiniGame
     void Start()
     {
         audioS = GetComponent<AudioSource>();
+        previousWords = new string[3];
         // Pour le test, à supprimer
         InitNewWord();
     }
@@ -75,10 +81,37 @@ public class DactyloManager : MiniGame
         wordPosition = 0;
 
         // Retourne chiffre aléatoire entre 0 et wordlist.length => Améliorer le Random.Range si possible
-        int value = Random.Range(0, wordList.Length - 1);
-        wordToCopy = wordList[value].ToUpper();
+        
+        do
+        {
+            int value = Random.Range(0, wordList.Length - 1);
 
+            wordInList = IsWordInList(wordList[value].ToUpper());
+
+            if (!wordInList)
+            {
+                wordToCopy = wordList[value].ToUpper();
+                previousWords[currentSuccess] = wordToCopy;
+            }
+
+        } while (wordInList);
+
+        wordInList = true;
+        
         InstantiateLetters();
+    }
+
+    bool IsWordInList(string word)
+    {
+        for(int i = 0; i < previousWords.Length; i++)
+        {
+            if(previousWords[i] == word)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // Fonction qui détruit les prefabs de lettre dans la hiérarchie 
