@@ -14,12 +14,22 @@ public class PopUps : MonoBehaviour
 
     public MiniGame miniGame = null;
 
-    private MiniGame myMiniGame;
+    public MiniGame myMiniGame;
 
     public bool isActivated = false;
 
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+
+    public void ActivateTroll()
     {
         activePopUps.Add(this);
         ChangeAnger?.Invoke(activePopUps.Count);
@@ -46,9 +56,7 @@ public class PopUps : MonoBehaviour
         if (!GameManager.Instance.isPlaying)
         {
             if (Input.GetMouseButtonDown(0))
-            {
-                
-
+            {   
                 ActivateMiniGame();
             }
         }
@@ -72,7 +80,7 @@ public class PopUps : MonoBehaviour
     private void ActivateMiniGame()
     {
         myMiniGame = Instantiate(miniGame, Vector3.zero, Quaternion.identity);
-        GameManager.Instance.isPlaying = false;
+        GameManager.Instance.isPlaying = true;
 
         myMiniGame.associatedTroll = this;
     }
@@ -80,6 +88,8 @@ public class PopUps : MonoBehaviour
     public void OnMiniGameWin()
     {
         RemoveTroll();
+
+        GameManager.Instance.isPlaying = false;
     }
 
     public void RemoveTroll()
@@ -87,6 +97,8 @@ public class PopUps : MonoBehaviour
         gameObject.SetActive(false);
 
         activePopUps.Remove(this);
+
+        Debug.Log(activePopUps.Count);
 
         ChangeAnger?.Invoke(activePopUps.Count);
     }
