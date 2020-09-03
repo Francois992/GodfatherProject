@@ -20,12 +20,18 @@ public class PopUps : MonoBehaviour
 
     private void Awake()
     {
-        activePopUps.Add(this);
+        gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void ActivateTroll()
+    {
+        activePopUps.Add(this);
         ChangeAnger?.Invoke(activePopUps.Count);
     }
 
@@ -91,6 +97,8 @@ public class PopUps : MonoBehaviour
         gameObject.SetActive(false);
 
         activePopUps.Remove(this);
+
+        Debug.Log(activePopUps.Count);
 
         ChangeAnger?.Invoke(activePopUps.Count);
     }

@@ -63,6 +63,7 @@ public class DactyloManager : MiniGame
             inputF.Select();
             inputF.ActivateInputField();
         }
+        
     }
 
     // Fonction qui initialise le mot que ce soit à l'écran ou dans la hiérarchie
@@ -134,6 +135,7 @@ public class DactyloManager : MiniGame
             GameObject tmp = Instantiate(LetterPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
             tmp.transform.SetParent(GameObject.Find("WordToCopy").transform, false);
+
             tmp.GetComponentInChildren<Text>().text = wordToCopy[i].ToString();
 
             letters.Add(tmp.GetComponentInChildren<Text>());
@@ -143,13 +145,21 @@ public class DactyloManager : MiniGame
     // Fonction appelée lorsque l'évènement "onValueChange" de l'inputfield est déclenché
     void OnInputValueChange()
     {
-        TransformToUpperCase();
-
-        // Vérification afin que la fonction ne soit pas appelée plusieurs fois (défaut de onValueChange, c'est pas précis)
-        if (!win && inputF.text != "")
+        if(!GameObject.Find("MenuPause").GetComponent<PauseManager>().isPaused)
         {
-            CheckIfValid();
+            TransformToUpperCase();
+
+            // Vérification afin que la fonction ne soit pas appelée plusieurs fois (défaut de onValueChange, c'est pas précis)
+            if (!win && inputF.text != "")
+            {
+                CheckIfValid();
+            }
         }
+        else
+        {
+            inputF.text = "";
+        }
+
     }
 
     // Fonction qui passe le texte de l'input en majuscule
