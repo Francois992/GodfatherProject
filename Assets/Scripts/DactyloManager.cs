@@ -9,6 +9,10 @@ public class DactyloManager : MonoBehaviour
     private int numberOfSuccessToWin = 3;
 
     [SerializeField]
+    private float timeHighlightWrong = 1;
+    bool wrongAnswer;
+
+    [SerializeField]
     private string[] wordList;
     private string wordToCopy;
     private int wordPosition; //Position dans le mot à recopier
@@ -24,14 +28,15 @@ public class DactyloManager : MonoBehaviour
     [SerializeField]
     private Text currentSuccessText;
 
+    [SerializeField]
+    private ShakeObject objectShaker;
+
     private List<Text> letters = new List<Text>();
 
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        // Add Hide Input Caret
+        // Pour le test, à supprimer
         InitNewWord();
     }
 
@@ -52,6 +57,9 @@ public class DactyloManager : MonoBehaviour
     // Reset la position dans le mot
     void InitNewWord()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         EmptyPreviousLetters();
 
         inputF.text = "";
@@ -91,7 +99,6 @@ public class DactyloManager : MonoBehaviour
 
             letters.Add(tmp.GetComponentInChildren<Text>());
         }
-
     }
 
     // Fonction appelée lorsque l'évènement "onValueChange" de l'inputfield est déclenché
@@ -133,25 +140,33 @@ public class DactyloManager : MonoBehaviour
                 else
                 {
                     win = true;
-                    // Passer à la suite
+                    GameWon();
                     Debug.Log("C'est Win");
                 }
             }
         }
         else
         {
-            // Faire trembler écran
             // Augmenter jauge de sel
 
-            foreach (Transform child in GameObject.Find("WordToCopy").transform)
-            {
-                // Do Something to all letters
-            }
+            objectShaker.ShakeThis(timeHighlightWrong);
+            
+            if(!wrongAnswer)
+                StartCoroutine(DisplayLetterCaseBright(GameObject.Find("WordToCopy").transform.GetChild(wordPosition).GetComponent<Image>()));
 
             Debug.Log("NOPE");
         }
 
         inputF.text = "";
+    }
+
+    IEnumerator DisplayLetterCaseBright(Image child)
+    {
+        wrongAnswer = true;
+        child.GetComponent<Image>().color = Color.red;
+        yield return new WaitForSeconds(timeHighlightWrong);
+        child.GetComponent<Image>().color = Color.white;
+        wrongAnswer = false;
     }
 
     // Fonction qui ajoute un au nombre de succès
@@ -160,4 +175,15 @@ public class DactyloManager : MonoBehaviour
         currentSuccess++;
         currentSuccessText.text = currentSuccess.ToString();
     }
+
+    void GameWon()
+    {
+        // Do Something
+
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+   
+
 }
