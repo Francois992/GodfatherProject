@@ -59,6 +59,10 @@ public class TypingCtrl : MiniGame
                 {
                     currentLine++;
                     currentCase = 0;
+                    //if (champDeSaisie.transform.GetChild(currentLine - 1).GetChild(0).GetComponent<Text>().color != new Color(0, 255, 0))
+                    //{
+                    //    StartCoroutine("FlashRed2");
+                    //}
                 }
             }
             else if (Input.GetKeyUp(KeyCode.Return))
