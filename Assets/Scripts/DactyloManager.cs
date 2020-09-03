@@ -151,7 +151,7 @@ public class DactyloManager : MiniGame
             objectShaker.ShakeThis(timeHighlightWrong);
             
             if(!wrongAnswer)
-                StartCoroutine(DisplayLetterCaseBright(GameObject.Find("WordToCopy").transform.GetChild(wordPosition).GetComponent<Image>()));
+                StartCoroutine(DisplayLetterCaseBright());
 
             Debug.Log("NOPE");
         }
@@ -159,12 +159,22 @@ public class DactyloManager : MiniGame
         inputF.text = "";
     }
 
-    IEnumerator DisplayLetterCaseBright(Image child)
+    IEnumerator DisplayLetterCaseBright()
     {
         wrongAnswer = true;
-        child.GetComponent<Image>().color = Color.red;
+        
+        foreach (Transform child in GameObject.Find("WordToCopy").transform)
+        {
+            child.GetComponent<Image>().color = Color.red;
+        }
+
         yield return new WaitForSeconds(timeHighlightWrong);
-        child.GetComponent<Image>().color = Color.white;
+
+        foreach (Transform child in GameObject.Find("WordToCopy").transform)
+        {
+            child.GetComponent<Image>().color = Color.white;
+        }
+
         wrongAnswer = false;
     }
 

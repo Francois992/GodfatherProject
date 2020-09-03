@@ -132,7 +132,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 25
+  m_Spacing: 50
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44001cace53445f4d91e49387b920fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  associatedTroll: {fileID: 0}
   numberOfSuccessToWin: 3
   timeHighlightWrong: 0.5
   wordList:
