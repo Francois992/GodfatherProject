@@ -108,4 +108,15 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("You Lose !");
     }
+
+    private void GameWin()
+    {
+
+    }
+
+    private void Restart()
+    {
+        anger = 0;
+        addedAnger = 0;
+    }
 }

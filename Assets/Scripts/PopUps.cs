@@ -13,6 +13,8 @@ public class PopUps : MonoBehaviour
 
     public static Action<int> ChangeAnger;
 
+    public Canvas miniGame = null;
+
     // Start is called before the first frame update
     void Start()
     {
