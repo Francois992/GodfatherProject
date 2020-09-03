@@ -172,7 +172,7 @@ RectTransform:
   - {fileID: 1809733616}
   - {fileID: 109136106}
   m_Father: {fileID: 8986376582139417269}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -527,7 +527,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 4743388339730929467}
   - {fileID: 1185161373}
   - {fileID: 941745680626537678}
   - {fileID: 941745678992591895}
@@ -613,8 +612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   associatedTroll: {fileID: 0}
-  allNumbersArray: 34150000f8120000dd24000005050000f0240000aa1e0000
-  winOrders: 9a090000d8110000970d0000ea040000d911000042020000
+  allNumbersArray: 34150000f8120000dd24000005050000f0240000ab1e0000
+  winOrders: 9a090000d8110000970d0000ea040000d91100002a060000
   inputPlayer: {fileID: 1185161374}
   LetterPrefab: {fileID: 132647342521290973, guid: 8eca74b0a9ea3694da3049249c54d195,
     type: 3}
