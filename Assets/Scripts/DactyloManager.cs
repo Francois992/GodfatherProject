@@ -41,7 +41,7 @@ public class DactyloManager : MonoBehaviour
         inputF.onValueChanged.AddListener(delegate { OnInputValueChange(); });
 
         // Au cas où le clique fasse perdre le focus, on le récupère
-        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
+        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3"))
         {
             inputF.Select();
             inputF.ActivateInputField();
