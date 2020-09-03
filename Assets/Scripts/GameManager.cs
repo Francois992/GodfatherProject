@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField] public Spawn[] spawns;
 
+    public bool isPlaying = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,7 +68,11 @@ public class GameManager : MonoBehaviour
         {
             if(spawns[i].spawnTime <= timer)
             {
-                spawns[i].pop.gameObject.SetActive(true);
+                if (!spawns[i].pop.isActivated)
+                {
+                    spawns[i].pop.isActivated = true;
+                    spawns[i].pop.gameObject.SetActive(true);
+                }
             }
         }
 

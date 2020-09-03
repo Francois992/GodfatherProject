@@ -141,4 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da89623f5edce9249a9fd82475c77024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 10
+  miniGame: {fileID: 6877726329562833606, guid: 929fd4ae7ad431e4f91d69830596eeb6,
+    type: 3}

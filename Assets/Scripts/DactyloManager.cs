@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DactyloManager : MonoBehaviour
+public class DactyloManager : MiniGame
 {
     [SerializeField]
     private int numberOfSuccessToWin = 3;
@@ -32,7 +32,6 @@ public class DactyloManager : MonoBehaviour
     private ShakeObject objectShaker;
 
     private List<Text> letters = new List<Text>();
-
 
     void Start()
     {
@@ -179,7 +178,9 @@ public class DactyloManager : MonoBehaviour
     void GameWon()
     {
         // Do Something
+        Destroy(gameObject);
 
+        associatedTroll.OnMiniGameWin();
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
