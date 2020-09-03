@@ -134,6 +134,9 @@ public class GameManager : MonoBehaviour
     {
         StopCoroutine(UpdateAnger());
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         WinScreen.gameObject.SetActive(true);
     }
 
