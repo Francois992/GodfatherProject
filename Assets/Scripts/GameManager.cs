@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,10 +18,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        PopUps.ChangeAnger += changeAddedValue;
+
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -33,7 +35,6 @@ public class GameManager : MonoBehaviour
     private float angerMax = 100;
 
     private float timer = 0;
-    [SerializeField] private float gameDuration = 180;
 
     [Serializable] public struct Spawn
     {
@@ -42,18 +43,18 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField] public Spawn[] spawns;
 
+    [SerializeField] public Canvas LooseScreen = null;
+
     public bool isPlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        PopUps.ChangeAnger += changeAddedValue;
-
+        LooseScreen.gameObject.SetActive(false);
         for (int i = 0; i < spawns.Length; i++)
         {
             
             spawns[i].pop.gameObject.SetActive(false);
-            
         }
 
         StartCoroutine(UpdateAnger());
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
                 if (!spawns[i].pop.isActivated)
                 {
                     spawns[i].pop.isActivated = true;
+                    spawns[i].pop.ActivateTroll();                
                     spawns[i].pop.gameObject.SetActive(true);
                 }
             }
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
     {
         StopCoroutine(UpdateAnger());
 
-        Debug.Log("You Lose !");
+        LooseScreen.gameObject.SetActive(true);
     }
 
     private void GameWin()
@@ -120,9 +122,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Restart()
+    public void Restart()
     {
         anger = 0;
         addedAnger = 0;
+
+        timer = 0;
+        HUD.Instance.AngerBar.fillAmount = 0;
+
+        LooseScreen.gameObject.SetActive(false);
+
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
