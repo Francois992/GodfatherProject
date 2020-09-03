@@ -31,10 +31,17 @@ public class DactyloManager : MiniGame
     [SerializeField]
     private ShakeObject objectShaker;
 
+    [SerializeField]
+    private AudioClip[] keyboardSounds;
+    [SerializeField]
+    private AudioClip errorSound;
+    private AudioSource audioS;
+
     private List<Text> letters = new List<Text>();
 
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         // Pour le test, à supprimer
         InitNewWord();
     }
@@ -125,6 +132,10 @@ public class DactyloManager : MiniGame
     {
         if (inputF.text == wordToCopy[wordPosition].ToString()) 
         {
+            //Sons de claviers
+            GenerateRandomKeyboardSound();
+
+
             letters[wordPosition].text = "";
             wordPosition++;
             Debug.Log("OK");
@@ -147,6 +158,8 @@ public class DactyloManager : MiniGame
         else
         {
             // Augmenter jauge de sel
+
+            audioS.PlayOneShot(errorSound);
 
             objectShaker.ShakeThis(timeHighlightWrong);
             
@@ -176,6 +189,13 @@ public class DactyloManager : MiniGame
         }
 
         wrongAnswer = false;
+    }
+
+    void GenerateRandomKeyboardSound()
+    {
+        int i = Random.Range(0, keyboardSounds.Length - 1);
+
+        audioS.PlayOneShot(keyboardSounds[i]);
     }
 
     // Fonction qui ajoute un au nombre de succès
