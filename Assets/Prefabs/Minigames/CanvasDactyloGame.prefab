@@ -798,7 +798,6 @@ MonoBehaviour:
     type: 3}
   successLogos: {fileID: 8744001195316299971}
   inputF: {fileID: 6877726330416337325}
-  currentSuccessText: {fileID: 0}
   objectShaker: {fileID: 6877726329728792556}
   keyboardSounds:
   - {fileID: 8300000, guid: 6c080c7719e02304babc93f05073ce75, type: 3}
@@ -807,6 +806,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b65ed562489ec740899a6172f56dc29, type: 3}
   - {fileID: 8300000, guid: 32321789c07aa7e45bdc1abe4350e4a4, type: 3}
   errorSound: {fileID: 8300000, guid: c0bba469b29fff04bb97a72a2e233b75, type: 3}
+  validSound: {fileID: 8300000, guid: df0c5265f88a96042bae36c5aede8860, type: 3}
 --- !u!82 &5556189523554850483
 AudioSource:
   m_ObjectHideFlags: 0

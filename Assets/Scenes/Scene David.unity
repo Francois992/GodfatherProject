@@ -357,11 +357,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2432195420252248486, guid: 7783bd44a60044b45a3c05f388701eb2,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2933442350817422118, guid: 7783bd44a60044b45a3c05f388701eb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -467,6 +462,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5634631479462739278, guid: 7783bd44a60044b45a3c05f388701eb2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8729048317443305984, guid: 7783bd44a60044b45a3c05f388701eb2,
         type: 3}
       propertyPath: m_Name
@@ -481,11 +481,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6877726329562833606, guid: 929fd4ae7ad431e4f91d69830596eeb6,
-        type: 3}
-      propertyPath: validSound
-      value: 
-      objectReference: {fileID: 8300000, guid: df0c5265f88a96042bae36c5aede8860, type: 3}
     - target: {fileID: 6877726329562833609, guid: 929fd4ae7ad431e4f91d69830596eeb6,
         type: 3}
       propertyPath: m_LocalPosition.x
