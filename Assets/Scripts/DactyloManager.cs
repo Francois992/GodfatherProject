@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class DactyloManager : MiniGame
 {
+
     [SerializeField]
     private int numberOfSuccessToWin = 3;
 
@@ -27,11 +28,12 @@ public class DactyloManager : MiniGame
     private GameObject LetterPrefab;
     private int currentSuccess;
 
+    [SerializeField]
+    private GameObject successLogos;
+    private Image[] successLogosList;
 
     [SerializeField]
     private InputField inputF;
-    [SerializeField]
-    private Text currentSuccessText;
 
     [SerializeField]
     private ShakeObject objectShaker;
@@ -40,13 +42,17 @@ public class DactyloManager : MiniGame
     private AudioClip[] keyboardSounds;
     [SerializeField]
     private AudioClip errorSound;
+    [SerializeField]
+    private AudioClip validSound;
     private AudioSource audioS;
 
     private List<Text> letters = new List<Text>();
 
+
     void Start()
     {
         audioS = GetComponent<AudioSource>();
+        successLogosList = successLogos.GetComponentsInChildren<Image>();
         previousWords = new string[3];
         // Pour le test, à supprimer
         InitNewWord();
@@ -58,7 +64,7 @@ public class DactyloManager : MiniGame
         inputF.onValueChanged.AddListener(delegate { OnInputValueChange(); });
 
         // Au cas où le clique fasse perdre le focus, on le récupère
-        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3"))
+        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3") || Input.GetKeyDown(KeyCode.Escape))
         {
             inputF.Select();
             inputF.ActivateInputField();
@@ -85,7 +91,7 @@ public class DactyloManager : MiniGame
         
         do
         {
-            int value = Random.Range(0, wordList.Length - 1);
+            int value = Random.Range(0, wordList.Length);
 
             wordInList = IsWordInList(wordList[value].ToUpper());
 
@@ -137,7 +143,7 @@ public class DactyloManager : MiniGame
             tmp.transform.SetParent(GameObject.Find("WordToCopy").transform, false);
 
             tmp.GetComponentInChildren<Text>().text = wordToCopy[i].ToString();
-
+            
             letters.Add(tmp.GetComponentInChildren<Text>());
         }
     }
@@ -178,13 +184,15 @@ public class DactyloManager : MiniGame
             //Sons de claviers
             GenerateRandomKeyboardSound();
 
-
             letters[wordPosition].text = "";
             wordPosition++;
             Debug.Log("OK");
 
             if(wordPosition == wordToCopy.Length)
             {
+                successLogosList[currentSuccess].color = Color.green;
+                audioS.PlayOneShot(validSound);
+
                 AddSuccess();
                 if (currentSuccess < numberOfSuccessToWin)
                 {
@@ -236,7 +244,7 @@ public class DactyloManager : MiniGame
 
     void GenerateRandomKeyboardSound()
     {
-        int i = Random.Range(0, keyboardSounds.Length - 1);
+        int i = Random.Range(0, keyboardSounds.Length);
 
         audioS.PlayOneShot(keyboardSounds[i]);
     }
@@ -245,7 +253,6 @@ public class DactyloManager : MiniGame
     void AddSuccess()
     {
         currentSuccess++;
-        currentSuccessText.text = currentSuccess.ToString();
     }
 
     void GameWon()
@@ -258,6 +265,4 @@ public class DactyloManager : MiniGame
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-   
-
 }

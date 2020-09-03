@@ -277,6 +277,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7574977182705795818, guid: a8d7bf9fa6dca48419a60a705cd78e87,
+        type: 3}
+      propertyPath: allNumbersArray.Array.data[5]
+      value: 7851
+      objectReference: {fileID: 0}
+    - target: {fileID: -7574977182705795818, guid: a8d7bf9fa6dca48419a60a705cd78e87,
+        type: 3}
+      propertyPath: winOrders.Array.data[5]
+      value: 1578
+      objectReference: {fileID: 0}
     - target: {fileID: 5975843066362196753, guid: a8d7bf9fa6dca48419a60a705cd78e87,
         type: 3}
       propertyPath: m_Camera

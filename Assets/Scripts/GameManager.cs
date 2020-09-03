@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Spawn[] spawns;
 
     [SerializeField] public Canvas LooseScreen = null;
+    [SerializeField] public Canvas WinScreen = null;
 
     public bool isPlaying = false;
 
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LooseScreen.gameObject.SetActive(false);
+        WinScreen.gameObject.SetActive(false);
         for (int i = 0; i < spawns.Length; i++)
         {
             
@@ -112,6 +114,17 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        for(int i = 0; i < spawns.Length; i++)
+        {
+            if (spawns[i].pop.myMiniGame != null)
+            {
+                spawns[i].pop.myMiniGame.gameObject.SetActive(false);
+            }
+        }
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         StopCoroutine(UpdateAnger());
 
         LooseScreen.gameObject.SetActive(true);
@@ -119,7 +132,12 @@ public class GameManager : MonoBehaviour
 
     private void GameWin()
     {
+        StopCoroutine(UpdateAnger());
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        WinScreen.gameObject.SetActive(true);
     }
 
     public void Restart()
@@ -131,8 +149,14 @@ public class GameManager : MonoBehaviour
         HUD.Instance.AngerBar.fillAmount = 0;
 
         LooseScreen.gameObject.SetActive(false);
+        WinScreen.gameObject.SetActive(false);
 
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

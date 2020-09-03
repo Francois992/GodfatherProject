@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarreCtrl : MonoBehaviour
+public class BarreCtrl : MiniGame
 {
     public RectTransform background;
 
     RectTransform rect;
 
+    [SerializeField] private GameObject Spacebar;
+
     // Start is called before the first frame update
     void Start()
     {
-        rect = transform as RectTransform;
+        rect = Spacebar.transform as RectTransform;
     }
 
     // Update is called once per frame
@@ -30,6 +32,15 @@ public class BarreCtrl : MonoBehaviour
         {
             Debug.Log("le minijeu est fini");
             // revenir au jeu principal
+
+            GameWin();
         }
+    }
+
+    private void GameWin()
+    {
+        Destroy(gameObject);
+
+        associatedTroll.OnMiniGameWin();
     }
 }
