@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TypingCtrl : MonoBehaviour
+public class TypingCtrl : MiniGame
 {
 
     public string[] phrases;
@@ -76,6 +76,8 @@ public class TypingCtrl : MonoBehaviour
                         if (currentLine == phrases.Length)
                         {
                             Debug.Log("mini jeu fini");
+
+                            GameWin();
                             // retour au menu
                         }
                     }
@@ -141,5 +143,12 @@ public class TypingCtrl : MonoBehaviour
                 newCube.transform.GetChild(0).GetComponent<Text>().text = c.ToString();
             }
         }
+    }
+
+    private void GameWin()
+    {
+        Destroy(gameObject);
+
+        associatedTroll.OnMiniGameWin();
     }
 }
