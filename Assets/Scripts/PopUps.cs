@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class PopUps : MonoBehaviour
 {
-    public float duration = 10f;
 
     private float elapsedTime = 0;
 
     public static List<PopUps> activePopUps = new List<PopUps>();
 
     public static Action<int> ChangeAnger;
+
+    public MiniGame miniGame = null;
+
+    private MiniGame myMiniGame;
+
+    public bool isActivated = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,19 +43,16 @@ public class PopUps : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!GameManager.Instance.isPlaying)
         {
-            for(int i = GameManager.Instance.spawns.Length - 1; i >= 0; i--)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (GameManager.Instance.spawns[i].pop = this) gameObject.SetActive(false);
+                
 
-                activePopUps.Remove(this);
-
-                ChangeAnger?.Invoke(activePopUps.Count);
+                ActivateMiniGame();
             }
-
-            ActivateMiniGame();
         }
+        
     }
 
     private void HighlightOn()
@@ -69,6 +71,23 @@ public class PopUps : MonoBehaviour
 
     private void ActivateMiniGame()
     {
-        Debug.Log("Mini jeu !");
+        myMiniGame = Instantiate(miniGame, Vector3.zero, Quaternion.identity);
+        GameManager.Instance.isPlaying = false;
+
+        myMiniGame.associatedTroll = this;
+    }
+
+    public void OnMiniGameWin()
+    {
+        RemoveTroll();
+    }
+
+    public void RemoveTroll()
+    {
+        gameObject.SetActive(false);
+
+        activePopUps.Remove(this);
+
+        ChangeAnger?.Invoke(activePopUps.Count);
     }
 }
