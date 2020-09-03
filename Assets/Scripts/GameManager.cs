@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public Canvas LooseScreen = null;
     [SerializeField] public Canvas WinScreen = null;
+    [SerializeField] public Canvas StoryScreen = null;
 
     public bool isPlaying = false;
 
@@ -54,9 +55,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float addedSaltValue4 = 1.9f;
     [SerializeField] private float addedSaltValue5= 2;
 
+    private bool isGamePlaying = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        HUD.Instance.gameObject.SetActive(false);
+
         LooseScreen.gameObject.SetActive(false);
         WinScreen.gameObject.SetActive(false);
         for (int i = 0; i < spawns.Length; i++)
@@ -71,26 +76,29 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-
-        for(int i  = 0; i < spawns.Length; i++)
+        if (isGamePlaying)
         {
-            if(spawns[i].spawnTime <= timer)
+            timer += Time.deltaTime;
+
+            for (int i = 0; i < spawns.Length; i++)
             {
-                if (!spawns[i].pop.isActivated)
+                if (spawns[i].spawnTime <= timer)
                 {
-                    spawns[i].pop.isActivated = true;
-                    spawns[i].pop.ActivateTroll();                
-                    spawns[i].pop.gameObject.SetActive(true);
+                    if (!spawns[i].pop.isActivated)
+                    {
+                        spawns[i].pop.isActivated = true;
+                        spawns[i].pop.ActivateTroll();
+                        spawns[i].pop.gameObject.SetActive(true);
+                    }
                 }
             }
-        }
 
-        if (PopUps.trolls.Count == 0) GameWin();
+            if (PopUps.trolls.Count == 0) GameWin();
 
-        if(anger >= angerMax)
-        {
-            GameOver();
+            if (anger >= angerMax)
+            {
+                GameOver();
+            }
         }
     }
 
@@ -135,6 +143,8 @@ public class GameManager : MonoBehaviour
 
         StopCoroutine(UpdateAnger());
 
+        HUD.Instance.gameObject.SetActive(false);
+
         LooseScreen.gameObject.SetActive(true);
     }
 
@@ -144,6 +154,8 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        HUD.Instance.gameObject.SetActive(false);
 
         WinScreen.gameObject.SetActive(true);
     }
@@ -166,5 +178,14 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void StartGame()
+    {
+        isGamePlaying = true;
+
+        StoryScreen.gameObject.SetActive(false);
+
+        HUD.Instance.gameObject.SetActive(true);
     }
 }
