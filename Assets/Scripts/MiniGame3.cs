@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MiniGame3 : MonoBehaviour
+public class MiniGame3 : MiniGame
 {
     public string[] Orders;
     private string winOrder;
@@ -33,7 +33,7 @@ public class MiniGame3 : MonoBehaviour
                 
                 if (winOrder == inputPlayerText)
                 {
-                    Debug.Log("Win");
+                    GameWin();
                 }
                 else
                 {
@@ -41,8 +41,15 @@ public class MiniGame3 : MonoBehaviour
                 }
             }
 
-            //Debug.Log(inputPlayer.text);
+            Debug.Log(inputPlayer.text);
         }
+    }
+
+    private void GameWin()
+    {
+        Destroy(gameObject);
+
+        associatedTroll.OnMiniGameWin();
     }
 
 }
