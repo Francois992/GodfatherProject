@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (PopUps.trolls.Count == 0) GameWin();
+
         if(anger >= angerMax)
         {
             GameOver();
