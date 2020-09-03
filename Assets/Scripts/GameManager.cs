@@ -48,6 +48,12 @@ public class GameManager : MonoBehaviour
 
     public bool isPlaying = false;
 
+    [SerializeField] private float addedSaltValue1 = 1;
+    [SerializeField] private float addedSaltValue2 = 1.5f;
+    [SerializeField] private float addedSaltValue3 = 1.75f;
+    [SerializeField] private float addedSaltValue4 = 1.9f;
+    [SerializeField] private float addedSaltValue5= 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +86,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (PopUps.trolls.Count == 0) GameWin();
+
         if(anger >= angerMax)
         {
             GameOver();
@@ -105,11 +113,11 @@ public class GameManager : MonoBehaviour
     private void changeAddedValue(int value)
     {
         if (value == 0) addedAnger = 0;
-        else if (value == 1) addedAnger = 1;
-        else if (value == 2) addedAnger = 1.5f;
-        else if (value == 3) addedAnger = 1.75f;
-        else if (value == 4) addedAnger = 1.9f;
-        else addedAnger = 2f;
+        else if (value == 1) addedAnger = addedSaltValue1;
+        else if (value == 2) addedAnger = addedSaltValue2;
+        else if (value == 3) addedAnger = addedSaltValue3;
+        else if (value == 4) addedAnger = addedSaltValue4;
+        else addedAnger = addedSaltValue5;
     }
 
     private void GameOver()

@@ -48,6 +48,7 @@ public class DactyloManager : MiniGame
 
     private List<Text> letters = new List<Text>();
 
+    [SerializeField] private float addedSalt = 5;
 
     void Start()
     {
@@ -216,6 +217,8 @@ public class DactyloManager : MiniGame
             
             if(!wrongAnswer)
                 StartCoroutine(DisplayLetterCaseBright());
+
+            GameManager.Instance.AddAnger(addedSalt);
 
             Debug.Log("NOPE");
         }
