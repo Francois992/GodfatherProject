@@ -43,3 +43,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d5c031744414c4793964d8d3f51b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anger: 0
+  addedAnger: 0
+  spawns:
+  - pop: {fileID: 0}
+    spawnTime: 4
+  - pop: {fileID: 0}
+    spawnTime: 24
+  - pop: {fileID: 0}
+    spawnTime: 58
+  - pop: {fileID: 0}
+    spawnTime: 64
+  - pop: {fileID: 0}
+    spawnTime: 78
+  - pop: {fileID: 0}
+    spawnTime: 112
+  - pop: {fileID: 0}
+    spawnTime: 138
+  - pop: {fileID: 0}
+    spawnTime: 160
+  - pop: {fileID: 0}
+    spawnTime: 170
+  LooseScreen: {fileID: 0}
+  WinScreen: {fileID: 0}
+  isPlaying: 0

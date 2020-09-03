@@ -14,7 +14,7 @@ public class PopUps : MonoBehaviour
 
     public MiniGame miniGame = null;
 
-    private MiniGame myMiniGame;
+    public MiniGame myMiniGame;
 
     public bool isActivated = false;
 
