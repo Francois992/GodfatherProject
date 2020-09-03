@@ -89,6 +89,8 @@ public class TypingCtrl : MiniGame
                     StartCoroutine("FlashRed");
                     // la jauge de sel augmente de 5
 
+                    GameManager.Instance.AddAnger(5);
+
                     //if (currentLine == phrases.Length)
                     //{
                     //    Debug.Log("mini jeu fini");

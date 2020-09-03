@@ -87,13 +87,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            AddAnger();
+            AddAnger(addedAnger);
         }
     }
 
-    private void AddAnger()
+    public void AddAnger(float addedValue)
     {
-        anger += addedAnger;
+        anger += addedValue;
 
         HUD.Instance.AngerBar.fillAmount = anger/ 100;
     }
