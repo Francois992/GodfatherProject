@@ -15,7 +15,12 @@ public class DactyloManager : MiniGame
     [SerializeField]
     private string[] wordList;
     private string wordToCopy;
-    private int wordPosition; //Position dans le mot à recopier
+
+    // Pour tester si le nouveau mot est différent du précédent
+    private bool wordInList = true;
+    private string[] previousWords;
+
+    private int wordPosition; // Position dans le mot à recopier
     private bool win;
 
     [SerializeField]
@@ -42,6 +47,7 @@ public class DactyloManager : MiniGame
     void Start()
     {
         audioS = GetComponent<AudioSource>();
+        previousWords = new string[3];
         // Pour le test, à supprimer
         InitNewWord();
     }
@@ -57,6 +63,7 @@ public class DactyloManager : MiniGame
             inputF.Select();
             inputF.ActivateInputField();
         }
+        
     }
 
     // Fonction qui initialise le mot que ce soit à l'écran ou dans la hiérarchie
@@ -75,10 +82,37 @@ public class DactyloManager : MiniGame
         wordPosition = 0;
 
         // Retourne chiffre aléatoire entre 0 et wordlist.length => Améliorer le Random.Range si possible
-        int value = Random.Range(0, wordList.Length - 1);
-        wordToCopy = wordList[value].ToUpper();
+        
+        do
+        {
+            int value = Random.Range(0, wordList.Length - 1);
 
+            wordInList = IsWordInList(wordList[value].ToUpper());
+
+            if (!wordInList)
+            {
+                wordToCopy = wordList[value].ToUpper();
+                previousWords[currentSuccess] = wordToCopy;
+            }
+
+        } while (wordInList);
+
+        wordInList = true;
+        
         InstantiateLetters();
+    }
+
+    bool IsWordInList(string word)
+    {
+        for(int i = 0; i < previousWords.Length; i++)
+        {
+            if(previousWords[i] == word)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // Fonction qui détruit les prefabs de lettre dans la hiérarchie 
@@ -101,6 +135,7 @@ public class DactyloManager : MiniGame
             GameObject tmp = Instantiate(LetterPrefab, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
             tmp.transform.SetParent(GameObject.Find("WordToCopy").transform, false);
+
             tmp.GetComponentInChildren<Text>().text = wordToCopy[i].ToString();
 
             letters.Add(tmp.GetComponentInChildren<Text>());
@@ -110,13 +145,21 @@ public class DactyloManager : MiniGame
     // Fonction appelée lorsque l'évènement "onValueChange" de l'inputfield est déclenché
     void OnInputValueChange()
     {
-        TransformToUpperCase();
-
-        // Vérification afin que la fonction ne soit pas appelée plusieurs fois (défaut de onValueChange, c'est pas précis)
-        if (!win && inputF.text != "")
+        if(!GameObject.Find("MenuPause").GetComponent<PauseManager>().isPaused)
         {
-            CheckIfValid();
+            TransformToUpperCase();
+
+            // Vérification afin que la fonction ne soit pas appelée plusieurs fois (défaut de onValueChange, c'est pas précis)
+            if (!win && inputF.text != "")
+            {
+                CheckIfValid();
+            }
         }
+        else
+        {
+            inputF.text = "";
+        }
+
     }
 
     // Fonction qui passe le texte de l'input en majuscule
