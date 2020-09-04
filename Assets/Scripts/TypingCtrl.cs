@@ -49,26 +49,36 @@ public class TypingCtrl : MiniGame
 
             if (!Input.GetKeyUp(KeyCode.Return))
             {
-                Color newColor = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
-                newColor.a = 1f;
-                champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color = newColor;
                 alreadyWon = false;
-                if (currentCase < champDeSaisie.transform.GetChild(currentLine).childCount - 1)
+                if (currentCase < champDeSaisie.transform.GetChild(currentLine).childCount)
                 {
+                    Color opaque = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
+                    opaque.a = 1f;
+                    champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color = opaque;
                     currentCase++;
                 }
                 else
                 {
-                    currentLine++;
                     currentCase = 0;
+                    foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
+                    {
+                        Color transparent = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
+                        transparent.a = 0f;
+                        child.GetChild(1).GetComponent<Text>().color = transparent;
+                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.Return))
             {
-                if (currentCase == 0 && currentLine > 0)
+                Debug.Log(currentCase);
+                Debug.Log(champDeSaisie.transform.GetChild(currentLine).childCount);
+                if (currentCase == champDeSaisie.transform.GetChild(currentLine).childCount)
                 {
                     if (!alreadyWon)
                     {
+                        currentLine++;
+                        currentCase = 0;
+
                         foreach (Transform child in champDeSaisie.transform.GetChild(currentLine - 1))
                         {
                             Color green = new Color(0, 255, 0);
