@@ -22,9 +22,14 @@ public class MiniGame3 : MiniGame
     [SerializeField]
     private float timeHighlightWrong = 1;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip[] keyboardSounds;
+    [SerializeField] private AudioClip errorSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         RandomOrder();
         AutoInputSelector();
         InstantiateNumber();
@@ -46,6 +51,8 @@ public class MiniGame3 : MiniGame
         {
 
             // (Musique) il faudrait mettre un son de clavier ici 
+            GenerateRandomKeyboardSound();
+
             InstantiateNumberPlayer();
 
             if (inputPlayer.text.Length == 4)
@@ -62,6 +69,8 @@ public class MiniGame3 : MiniGame
                 {
                     //essai raté ! 
                     // (Musique) il faudrait mettre un son de lose je suppose 
+                    audioS.PlayOneShot(errorSound);
+
                     objectShaker.ShakeThis(timeHighlightWrong);
                     EmptyPreviousNumber();
                     inputPlayer.text = "";
@@ -143,6 +152,14 @@ public class MiniGame3 : MiniGame
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
         associatedTroll.OnMiniGameWin();
+    }
+
+
+    void GenerateRandomKeyboardSound()
+    {
+        int i = Random.Range(0, keyboardSounds.Length);
+
+        audioS.PlayOneShot(keyboardSounds[i]);
     }
 
 }
