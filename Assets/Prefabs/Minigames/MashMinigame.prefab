@@ -463,7 +463,6 @@ GameObject:
   - component: {fileID: 4949155454249085827}
   - component: {fileID: 4949155454249085826}
   - component: {fileID: 7187183585051195996}
-  - component: {fileID: 1768137302634858134}
   m_Layer: 5
   m_Name: MashMinigame
   m_TagString: Untagged
@@ -573,6 +572,7 @@ MonoBehaviour:
   decaySpeed: 0.5
   Loadbar: {fileID: 4949155454095005829}
   SpaceBar: {fileID: 4949155453678155726}
+  keyboardSound: {fileID: 8300000, guid: 32321789c07aa7e45bdc1abe4350e4a4, type: 3}
   SpaceBarPressed: {fileID: 21300000, guid: 2c879dfbffeb26e4d9ad394f9b56cb72, type: 3}
   SpaceBarUnPressed: {fileID: 21300000, guid: b9af5468cf9a3c44d983b9eb75251d33, type: 3}
 --- !u!1 &8720374407542705943

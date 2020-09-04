@@ -23,7 +23,7 @@ public class BarreCtrl : MiniGame
     void Start()
     {
         audioS = GetComponent<AudioSource>();
-        rect = Spacebar.transform as RectTransform;
+        rect = Loadbar.transform as RectTransform;
     }
 
     // Update is called once per frame
