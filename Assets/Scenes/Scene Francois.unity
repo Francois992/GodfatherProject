@@ -2584,6 +2584,11 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.38
       objectReference: {fileID: 0}
+    - target: {fileID: 1672955979, guid: 4c59edc5281b1a94686d7dad26ecbad6, type: 3}
+      propertyPath: miniGame
+      value: 
+      objectReference: {fileID: 7187183585051195996, guid: 10a94023e09602c41838c60e0939cc09,
+        type: 3}
     - target: {fileID: 110746341262534179, guid: 4c59edc5281b1a94686d7dad26ecbad6,
         type: 3}
       propertyPath: m_Sprite
