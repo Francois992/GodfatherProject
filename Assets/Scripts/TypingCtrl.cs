@@ -49,7 +49,9 @@ public class TypingCtrl : MiniGame
 
             if (!Input.GetKeyUp(KeyCode.Return))
             {
-                champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                Color newColor = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
+                newColor.a = 1f;
+                champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color = newColor;
                 alreadyWon = false;
                 if (currentCase < champDeSaisie.transform.GetChild(currentLine).childCount - 1)
                 {
@@ -70,7 +72,7 @@ public class TypingCtrl : MiniGame
                         foreach (Transform child in champDeSaisie.transform.GetChild(currentLine - 1))
                         {
                             Color green = new Color(0, 255, 0);
-                            child.GetChild(0).GetComponent<Text>().color = green;
+                            child.GetChild(1).GetComponent<Text>().color = green;
                         }
                         linesWon++;
                         alreadyWon = true;
@@ -109,16 +111,24 @@ public class TypingCtrl : MiniGame
     {
         while (elapsedTime < .8f)
         {
-            Color baseColor = champDeSaisie.transform.GetChild(currentLine).GetChild(0).GetChild(0).GetComponent<Text>().color;
+            Color baseColor = champDeSaisie.transform.GetChild(currentLine).GetChild(0).GetChild(1).GetComponent<Text>().color;
             foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
             {
-                Color red = new Color(255, 0, 0);
-                child.GetChild(0).GetComponent<Text>().color = red;
+                if (child.GetChild(1).GetComponent<Text>().color.a == 1f)
+                {
+
+                    Color red = new Color(255, 0, 0);
+                    child.GetChild(1).GetComponent<Text>().color = red;
+                }
             }
             yield return new WaitForSeconds(0.1f);
             foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
             {
-                child.GetChild(0).GetComponent<Text>().color = baseColor;
+                if (child.GetChild(1).GetComponent<Text>().color.a == 1f)
+                {
+
+                    child.GetChild(1).GetComponent<Text>().color = baseColor;
+                }
             }
             yield return new WaitForSeconds(0.1f);
         }
@@ -144,7 +154,7 @@ public class TypingCtrl : MiniGame
                 Vector2 newAPos = new Vector2(champ.anchoredPosition.x - champ.sizeDelta.x / 2, champ.anchoredPosition.y + champ.sizeDelta.y / 2) + positionRelative;
                 newCube.GetComponent<RectTransform>().anchoredPosition = newAPos;
 
-                newCube.transform.GetChild(0).GetComponent<Text>().text = c.ToString();
+                newCube.transform.GetChild(1).GetComponent<Text>().text = c.ToString();
             }
         }
     }
