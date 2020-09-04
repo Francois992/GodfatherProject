@@ -261,7 +261,7 @@ public class DactyloManager : MiniGame
     void GameWon()
     {
         // Do Something
-        Destroy(gameObject);
+        Destroy(gameObject, 0.7f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
