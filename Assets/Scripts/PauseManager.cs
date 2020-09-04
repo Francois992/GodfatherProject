@@ -28,9 +28,6 @@ public class PauseManager : MonoBehaviour
                 pauseCanvas.GetComponent<Canvas>().enabled = false;
                 isPaused = false;
                 Time.timeScale = 1;
-
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }
