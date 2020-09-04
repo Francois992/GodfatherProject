@@ -613,5 +613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MashMinigame
       objectReference: {fileID: 0}
+    - target: {fileID: 7187183585051195996, guid: 10a94023e09602c41838c60e0939cc09,
+        type: 3}
+      propertyPath: decaySpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10a94023e09602c41838c60e0939cc09, type: 3}
