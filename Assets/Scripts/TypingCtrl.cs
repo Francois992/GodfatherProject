@@ -27,17 +27,25 @@ public class TypingCtrl : MiniGame
 
     [SerializeField] private float addedSalt = 5;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip[] keyboardSounds;
+    [SerializeField] private AudioClip errorSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         LanceMinijeu();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
+        if (Input.anyKeyDown && !Input.GetMouseButton(0) && !Input.GetMouseButton(1))
+        {
+            GenerateRandomKeyboardSound();
+        }
         if (Input.anyKey && !Input.GetMouseButton(0) && !Input.GetMouseButton(1))
         {
             holdingDown = true;
@@ -88,6 +96,7 @@ public class TypingCtrl : MiniGame
                 }
                 else
                 {
+                    audioS.PlayOneShot(errorSound);
                     Debug.Log("loseLine");
                     elapsedTime = 0f;
                     StartCoroutine("FlashRed");
@@ -161,10 +170,20 @@ public class TypingCtrl : MiniGame
 
     private void GameWin()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.7f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
         associatedTroll.OnMiniGameWin();
+    }
+
+
+
+    void GenerateRandomKeyboardSound()
+    {
+        int i = UnityEngine.Random.Range(0, keyboardSounds.Length);
+
+        //Debug.Log(keyboardSounds[i].name);
+        audioS.PlayOneShot(keyboardSounds[i]);
     }
 }

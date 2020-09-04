@@ -13,13 +13,17 @@ public class BarreCtrl : MiniGame
     [SerializeField] private GameObject Loadbar;
     [SerializeField] private GameObject SpaceBar;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip keyboardSound;
+
     [SerializeField] private Sprite SpaceBarPressed;
     [SerializeField] private Sprite SpaceBarUnPressed;
 
     // Start is called before the first frame update
     void Start()
     {
-        rect = Loadbar.transform as RectTransform;
+        audioS = GetComponent<AudioSource>();
+        rect = Spacebar.transform as RectTransform;
     }
 
     // Update is called once per frame
@@ -36,7 +40,8 @@ public class BarreCtrl : MiniGame
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                
+                audioS.PlayOneShot(keyboardSound);
+
                 Vector2 bigger = new Vector2(background.sizeDelta.x / 20, 0);
                 rect.sizeDelta += bigger;
                 rect.anchoredPosition += bigger / 2;
@@ -64,7 +69,7 @@ public class BarreCtrl : MiniGame
 
     private void GameWin()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.7f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 

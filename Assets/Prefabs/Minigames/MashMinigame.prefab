@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 4949155454249085827}
   - component: {fileID: 4949155454249085826}
   - component: {fileID: 7187183585051195996}
+  - component: {fileID: 1768137302634858134}
   m_Layer: 5
   m_Name: MashMinigame
   m_TagString: Untagged
