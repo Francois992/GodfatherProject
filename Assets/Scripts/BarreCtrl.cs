@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BarreCtrl : MiniGame
 {
@@ -9,12 +10,16 @@ public class BarreCtrl : MiniGame
 
     RectTransform rect;
 
-    [SerializeField] private GameObject Spacebar;
+    [SerializeField] private GameObject Loadbar;
+    [SerializeField] private GameObject SpaceBar;
+
+    [SerializeField] private Sprite SpaceBarPressed;
+    [SerializeField] private Sprite SpaceBarUnPressed;
 
     // Start is called before the first frame update
     void Start()
     {
-        rect = Spacebar.transform as RectTransform;
+        rect = Loadbar.transform as RectTransform;
     }
 
     // Update is called once per frame
@@ -31,10 +36,22 @@ public class BarreCtrl : MiniGame
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
                 Vector2 bigger = new Vector2(background.sizeDelta.x / 20, 0);
                 rect.sizeDelta += bigger;
                 rect.anchoredPosition += bigger / 2;
             }
+
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                SpaceBar.GetComponent<Image>().sprite = SpaceBarPressed;
+            }
+            else
+            {
+                SpaceBar.GetComponent<Image>().sprite = SpaceBarUnPressed;
+            }
+
         }
         else
         {
