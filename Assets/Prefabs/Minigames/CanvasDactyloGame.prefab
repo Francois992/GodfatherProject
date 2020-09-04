@@ -775,7 +775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   associatedTroll: {fileID: 0}
-  numberOfSuccessToWin: 3
+  numberOfSuccessToWin: 2
   timeHighlightWrong: 0.5
   wordList:
   - Gourgandine
@@ -794,6 +794,13 @@ MonoBehaviour:
   - Aliboron
   - Cossard
   - Patte-pelu
+  - Butor
+  - Cuistre
+  - Faquin
+  - Faraud
+  - Gougnafier
+  - Malapris
+  - Ostrogoth
   LetterPrefab: {fileID: 132647342521290973, guid: 8eca74b0a9ea3694da3049249c54d195,
     type: 3}
   successLogos: {fileID: 8744001195316299971}
