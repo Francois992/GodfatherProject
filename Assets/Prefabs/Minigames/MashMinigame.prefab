@@ -417,4 +417,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   associatedTroll: {fileID: 0}
   background: {fileID: 4949155453065845511}
+  decaySpeed: 0.5
   Spacebar: {fileID: 4949155454095005829}

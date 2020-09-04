@@ -5,6 +5,7 @@ using UnityEngine;
 public class BarreCtrl : MiniGame
 {
     public RectTransform background;
+    public float decaySpeed;
 
     RectTransform rect;
 
@@ -19,6 +20,13 @@ public class BarreCtrl : MiniGame
     // Update is called once per frame
     void Update()
     {
+        if (rect.sizeDelta.x > 0)
+        {
+            Vector2 smaller = new Vector2(decaySpeed, 0);
+            rect.sizeDelta -= smaller;
+            rect.anchoredPosition -= smaller / 2;
+        }
+
         if (rect.sizeDelta.x < background.sizeDelta.x)
         {
             if (Input.GetKeyDown(KeyCode.Space))
