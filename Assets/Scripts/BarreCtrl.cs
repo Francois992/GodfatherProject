@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BarreCtrl : MiniGame
 {
@@ -9,16 +10,20 @@ public class BarreCtrl : MiniGame
 
     RectTransform rect;
 
-    [SerializeField] private GameObject Spacebar;
+    [SerializeField] private GameObject Loadbar;
+    [SerializeField] private GameObject SpaceBar;
 
     private AudioSource audioS;
     [SerializeField] private AudioClip keyboardSound;
+
+    [SerializeField] private Sprite SpaceBarPressed;
+    [SerializeField] private Sprite SpaceBarUnPressed;
 
     // Start is called before the first frame update
     void Start()
     {
         audioS = GetComponent<AudioSource>();
-        rect = Spacebar.transform as RectTransform;
+        rect = Loadbar.transform as RectTransform;
     }
 
     // Update is called once per frame
@@ -41,6 +46,17 @@ public class BarreCtrl : MiniGame
                 rect.sizeDelta += bigger;
                 rect.anchoredPosition += bigger / 2;
             }
+
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                SpaceBar.GetComponent<Image>().sprite = SpaceBarPressed;
+            }
+            else
+            {
+                SpaceBar.GetComponent<Image>().sprite = SpaceBarUnPressed;
+            }
+
         }
         else
         {
@@ -53,7 +69,7 @@ public class BarreCtrl : MiniGame
 
     private void GameWin()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.7f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
