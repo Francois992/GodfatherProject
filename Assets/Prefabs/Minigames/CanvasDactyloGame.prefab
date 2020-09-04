@@ -780,7 +780,7 @@ MonoBehaviour:
   wordList:
   - Gourgandine
   - Orchidoclaste
-  - "Nodoc\xE9phale"
+  - Nodocephale
   - Coprolithe
   - Alburostre
   - Fot-en-cul
@@ -807,6 +807,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 32321789c07aa7e45bdc1abe4350e4a4, type: 3}
   errorSound: {fileID: 8300000, guid: c0bba469b29fff04bb97a72a2e233b75, type: 3}
   validSound: {fileID: 8300000, guid: df0c5265f88a96042bae36c5aede8860, type: 3}
+  addedSalt: 5
 --- !u!82 &5556189523554850483
 AudioSource:
   m_ObjectHideFlags: 0
