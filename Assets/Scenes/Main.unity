@@ -1195,6 +1195,7 @@ MonoBehaviour:
   trollPopSound: {fileID: 0}
   miniGameAppearing: {fileID: 0}
   miniGameDisappearing: {fileID: 0}
+  miniGameCompleted: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!1 &720584229 stripped
 GameObject:

@@ -24,6 +24,7 @@ public class PopUps : MonoBehaviour
     [SerializeField] private AudioClip trollPopSound;
     [SerializeField] private AudioClip miniGameAppearing;
     [SerializeField] private AudioClip miniGameDisappearing;
+    [SerializeField] private AudioClip miniGameCompleted;
 
     [SerializeField] private GameManager gameManager;
 
@@ -108,6 +109,7 @@ public class PopUps : MonoBehaviour
 
     public void RemoveTroll()
     {
+        audioS.PlayOneShot(miniGameCompleted);
         audioS.PlayOneShot(miniGameDisappearing);
 
         gameObject.SetActive(false);
