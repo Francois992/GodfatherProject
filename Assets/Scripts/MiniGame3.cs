@@ -140,6 +140,8 @@ public class MiniGame3 : MiniGame
     {
         Destroy(gameObject);
 
+        GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
+
         associatedTroll.OnMiniGameWin();
     }
 

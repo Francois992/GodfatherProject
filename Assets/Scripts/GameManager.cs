@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float addedSaltValue4 = 1.9f;
     [SerializeField] private float addedSaltValue5= 2;
 
+    [SerializeField] public float removedSaltValue = -8;
+
     private AudioSource audioS;
     [SerializeField] private AudioClip clickSound;
 

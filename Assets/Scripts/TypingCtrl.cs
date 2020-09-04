@@ -157,7 +157,7 @@ public class TypingCtrl : MiniGame
     {
         Destroy(gameObject);
 
-        GameManager.Instance.AddAnger(-8);
+        GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
         associatedTroll.OnMiniGameWin();
     }
