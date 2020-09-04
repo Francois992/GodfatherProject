@@ -11,9 +11,13 @@ public class BarreCtrl : MiniGame
 
     [SerializeField] private GameObject Spacebar;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip keyboardSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         rect = Spacebar.transform as RectTransform;
     }
 
@@ -31,6 +35,8 @@ public class BarreCtrl : MiniGame
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                audioS.PlayOneShot(keyboardSound);
+
                 Vector2 bigger = new Vector2(background.sizeDelta.x / 20, 0);
                 rect.sizeDelta += bigger;
                 rect.anchoredPosition += bigger / 2;
