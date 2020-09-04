@@ -735,11 +735,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   associatedTroll: {fileID: 0}
-  allNumbersArray: 34150000f8120000dd24000005050000f0240000ab1e0000
-  winOrders: 9a090000d8110000970d0000ea040000d91100002a060000
+  numberUnorganiz: ae0a000073210000d82400005e130000771000000f1e0000
+  winOrdersIncresing: 2b090000f00d00002d090000ed110000dd0400002f160000
+  winOrdersDecresing: 081d0000d0210000d8240000802600002d15000025260000
   inputPlayer: {fileID: 1185161374}
   LetterPrefab: {fileID: 132647342521290973, guid: 8eca74b0a9ea3694da3049249c54d195,
     type: 3}
+  consigne: {fileID: 941745678992591888}
   objectShaker: {fileID: 1742174010}
   timeHighlightWrong: 0.5
   keyboardSounds:

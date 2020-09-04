@@ -9,13 +9,18 @@ public class MiniGame3 : MiniGame
     private string numberToOrganize;
 
     [SerializeField]
-    private List<int> allNumbersArray = new List<int>();
+    private List<int> numberUnorganiz = new List<int>();
     [SerializeField]
-    private List<int> winOrders = new List<int>();
+    private List<int> winOrdersIncresing = new List<int>();
+    [SerializeField]
+    private List<int> winOrdersDecresing = new List<int>();
     [SerializeField]
     private InputField inputPlayer;
     [SerializeField]
     private GameObject LetterPrefab;
+
+    [SerializeField]
+    private Text consigne;
 
     [SerializeField]
     private ShakeObject objectShaker;
@@ -129,9 +134,20 @@ public class MiniGame3 : MiniGame
     //Choisi un ordre aleatoire dans la list "Orders"
     private void RandomOrder()
     {
-        var r = Random.Range(0, allNumbersArray.Count);
-        numberToOrganize = allNumbersArray[r].ToString();
-        winOrder = winOrders[r].ToString();
+        var r = Random.Range(0, numberUnorganiz.Count);
+        numberToOrganize = numberUnorganiz[r].ToString();
+
+        if (Random.value < 0.5f)
+        {
+            consigne.text = "Range les dans l'ordre croissant !";
+            winOrder = winOrdersIncresing[r].ToString();
+        }
+        else
+        {
+            consigne.text = "Range les dans l'ordre decroissant !";
+            winOrder = winOrdersDecresing[r].ToString();
+        }
+
         Debug.Log(numberToOrganize);
         Debug.Log(winOrder);
     }
