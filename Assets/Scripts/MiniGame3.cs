@@ -127,6 +127,8 @@ public class MiniGame3 : MiniGame
     {
         Destroy(gameObject);
 
+        GameManager.Instance.AddAnger(-8);
+
         associatedTroll.OnMiniGameWin();
     }
 

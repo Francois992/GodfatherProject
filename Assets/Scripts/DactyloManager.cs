@@ -263,6 +263,8 @@ public class DactyloManager : MiniGame
         // Do Something
         Destroy(gameObject);
 
+        GameManager.Instance.AddAnger(-8);
+
         associatedTroll.OnMiniGameWin();
 
         Cursor.visible = true;
