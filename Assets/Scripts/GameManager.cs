@@ -55,11 +55,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float addedSaltValue4 = 1.9f;
     [SerializeField] private float addedSaltValue5= 2;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip clickSound;
+
     private bool isGamePlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         HUD.Instance.gameObject.SetActive(false);
 
         LooseScreen.gameObject.SetActive(false);
@@ -177,11 +181,13 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
+        audioS.PlayOneShot(clickSound);
         Application.Quit();
     }
 
     public void StartGame()
     {
+        audioS.PlayOneShot(clickSound);
         isGamePlaying = true;
 
         StoryScreen.gameObject.SetActive(false);

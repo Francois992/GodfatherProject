@@ -3407,6 +3407,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1816512576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4241,11 +4252,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581396051787131828, guid: 76575baa6bae750438688a399d632fe6,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.501
       objectReference: {fileID: 0}
     - target: {fileID: 8928308943882510595, guid: 76575baa6bae750438688a399d632fe6,
         type: 3}
