@@ -170,7 +170,7 @@ public class TypingCtrl : MiniGame
 
     private void GameWin()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.7f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
