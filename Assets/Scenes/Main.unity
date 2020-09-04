@@ -1192,9 +1192,11 @@ MonoBehaviour:
     type: 3}
   myMiniGame: {fileID: 0}
   isActivated: 0
-  trollPopSound: {fileID: 0}
-  miniGameAppearing: {fileID: 0}
-  miniGameDisappearing: {fileID: 0}
+  trollPopSound: {fileID: 8300000, guid: 3957bed4703ab5e429bf4cea124df984, type: 3}
+  miniGameAppearing: {fileID: 8300000, guid: 79997080f03af0b4cabbe9fd2bbfdb16, type: 3}
+  miniGameDisappearing: {fileID: 8300000, guid: 758c5abe88245ef458895575d826f32f,
+    type: 3}
+  miniGameCompleted: {fileID: 8300000, guid: df0c5265f88a96042bae36c5aede8860, type: 3}
   gameManager: {fileID: 0}
 --- !u!1 &720584229 stripped
 GameObject:

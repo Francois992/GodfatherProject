@@ -222,7 +222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &469943486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &886995591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1514468092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +482,8 @@ MonoBehaviour:
   line: {fileID: 8347179486818968160, guid: 5324e6ad0ac4867408bf82cd6edd8fd3, type: 3}
   espcCubes: 50
   espcLignes: -50
+  addedSalt: 5
+  keyboardSounds: []
 --- !u!4 &1514468093
 Transform:
   m_ObjectHideFlags: 0
@@ -613,10 +615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MashMinigame
       objectReference: {fileID: 0}
-    - target: {fileID: 7187183585051195996, guid: 10a94023e09602c41838c60e0939cc09,
+    - target: {fileID: 4949155454249085829, guid: 10a94023e09602c41838c60e0939cc09,
         type: 3}
-      propertyPath: decaySpeed
-      value: 0.5
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10a94023e09602c41838c60e0939cc09, type: 3}

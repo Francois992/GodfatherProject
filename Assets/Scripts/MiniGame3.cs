@@ -9,22 +9,32 @@ public class MiniGame3 : MiniGame
     private string numberToOrganize;
 
     [SerializeField]
-    private List<int> allNumbersArray = new List<int>();
+    private List<int> numberUnorganiz = new List<int>();
     [SerializeField]
-    private List<int> winOrders = new List<int>();
+    private List<int> winOrdersIncresing = new List<int>();
+    [SerializeField]
+    private List<int> winOrdersDecresing = new List<int>();
     [SerializeField]
     private InputField inputPlayer;
     [SerializeField]
     private GameObject LetterPrefab;
 
     [SerializeField]
+    private Text consigne;
+
+    [SerializeField]
     private ShakeObject objectShaker;
     [SerializeField]
     private float timeHighlightWrong = 1;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip[] keyboardSounds;
+    [SerializeField] private AudioClip errorSound;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
         RandomOrder();
         AutoInputSelector();
         InstantiateNumber();
@@ -46,6 +56,8 @@ public class MiniGame3 : MiniGame
         {
 
             // (Musique) il faudrait mettre un son de clavier ici 
+            GenerateRandomKeyboardSound();
+
             InstantiateNumberPlayer();
 
             if (inputPlayer.text.Length == 4)
@@ -62,6 +74,8 @@ public class MiniGame3 : MiniGame
                 {
                     //essai raté ! 
                     // (Musique) il faudrait mettre un son de lose je suppose 
+                    audioS.PlayOneShot(errorSound);
+
                     objectShaker.ShakeThis(timeHighlightWrong);
                     EmptyPreviousNumber();
                     inputPlayer.text = "";
@@ -120,9 +134,20 @@ public class MiniGame3 : MiniGame
     //Choisi un ordre aleatoire dans la list "Orders"
     private void RandomOrder()
     {
-        var r = Random.Range(0, allNumbersArray.Count);
-        numberToOrganize = allNumbersArray[r].ToString();
-        winOrder = winOrders[r].ToString();
+        var r = Random.Range(0, numberUnorganiz.Count);
+        numberToOrganize = numberUnorganiz[r].ToString();
+
+        if (Random.value < 0.5f)
+        {
+            consigne.text = "Range les dans l'ordre croissant !";
+            winOrder = winOrdersIncresing[r].ToString();
+        }
+        else
+        {
+            consigne.text = "Range les dans l'ordre decroissant !";
+            winOrder = winOrdersDecresing[r].ToString();
+        }
+
         Debug.Log(numberToOrganize);
         Debug.Log(winOrder);
     }
@@ -138,9 +163,19 @@ public class MiniGame3 : MiniGame
 
     private void GameWin()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 0.7f);
+
+        GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
         associatedTroll.OnMiniGameWin();
+    }
+
+
+    void GenerateRandomKeyboardSound()
+    {
+        int i = Random.Range(0, keyboardSounds.Length);
+
+        audioS.PlayOneShot(keyboardSounds[i]);
     }
 
 }

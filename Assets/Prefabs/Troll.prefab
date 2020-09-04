@@ -232,6 +232,8 @@ MonoBehaviour:
   miniGameAppearing: {fileID: 8300000, guid: 79997080f03af0b4cabbe9fd2bbfdb16, type: 3}
   miniGameDisappearing: {fileID: 8300000, guid: 758c5abe88245ef458895575d826f32f,
     type: 3}
+  miniGameCompleted: {fileID: 8300000, guid: df0c5265f88a96042bae36c5aede8860, type: 3}
+  gameManager: {fileID: 0}
 --- !u!82 &714137773836922996
 AudioSource:
   m_ObjectHideFlags: 0
