@@ -951,6 +951,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2041903914169392771, guid: 7783bd44a60044b45a3c05f388701eb2,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 209318219}
     - target: {fileID: 2933442350817422118, guid: 7783bd44a60044b45a3c05f388701eb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1056,21 +1061,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5634631479462739278, guid: 7783bd44a60044b45a3c05f388701eb2,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8729048317443305984, guid: 7783bd44a60044b45a3c05f388701eb2,
         type: 3}
       propertyPath: m_Name
       value: CanvasPause
       objectReference: {fileID: 0}
-    - target: {fileID: 8729048317443305984, guid: 7783bd44a60044b45a3c05f388701eb2,
+    - target: {fileID: 8805471200918412220, guid: 7783bd44a60044b45a3c05f388701eb2,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 209318219}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7783bd44a60044b45a3c05f388701eb2, type: 3}
 --- !u!1001 &714439560
