@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MenuFunctions : MonoBehaviour
 {
-    [SerializeField]
-    private GameManager gameManager;
-
     private AudioSource audioS;
     [SerializeField]
     private AudioClip clickSound;
@@ -19,12 +16,12 @@ public class MenuFunctions : MonoBehaviour
     public void Restart()
     {
         audioS.PlayOneShot(clickSound);
-        gameManager.Restart();
+        GameManager.Instance.Restart();
     }
 
     public void Exit()
     {
         audioS.PlayOneShot(clickSound);
-        gameManager.ExitGame();
+        GameManager.Instance.ExitGame();
     }
 }
