@@ -55,11 +55,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float addedSaltValue4 = 1.9f;
     [SerializeField] private float addedSaltValue5= 2;
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip trollPopSound;
+
     private bool isGamePlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
+
         HUD.Instance.gameObject.SetActive(false);
 
         LooseScreen.gameObject.SetActive(false);
@@ -89,6 +94,8 @@ public class GameManager : MonoBehaviour
                         spawns[i].pop.isActivated = true;
                         spawns[i].pop.ActivateTroll();
                         spawns[i].pop.gameObject.SetActive(true);
+
+                        audioS.PlayOneShot(trollPopSound);
                     }
                 }
             }
