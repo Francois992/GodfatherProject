@@ -49,6 +49,8 @@ public class BarreCtrl : MiniGame
     {
         Destroy(gameObject);
 
+        GameManager.Instance.AddAnger(-8);
+
         associatedTroll.OnMiniGameWin();
     }
 }

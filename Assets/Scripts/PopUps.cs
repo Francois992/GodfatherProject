@@ -20,8 +20,17 @@ public class PopUps : MonoBehaviour
 
     public static List<PopUps> trolls = new List<PopUps>();
 
+    private AudioSource audioS;
+    [SerializeField] private AudioClip trollPopSound;
+    [SerializeField] private AudioClip miniGameAppearing;
+    [SerializeField] private AudioClip miniGameDisappearing;
+
+    [SerializeField] private GameManager gameManager;
+
     private void Awake()
     {
+        audioS = GetComponentInParent<AudioSource>();
+
         gameObject.SetActive(false);
 
         trolls.Add(this);
@@ -35,6 +44,7 @@ public class PopUps : MonoBehaviour
 
     public void ActivateTroll()
     {
+        audioS.PlayOneShot(trollPopSound);
         activePopUps.Add(this);
         ChangeAnger?.Invoke(activePopUps.Count);
     }
@@ -83,6 +93,7 @@ public class PopUps : MonoBehaviour
 
     private void ActivateMiniGame()
     {
+        audioS.PlayOneShot(miniGameAppearing);
         myMiniGame = Instantiate(miniGame, Vector3.zero, Quaternion.identity);
         GameManager.Instance.isPlaying = true;
 
@@ -92,12 +103,13 @@ public class PopUps : MonoBehaviour
     public void OnMiniGameWin()
     {
         RemoveTroll();
-
         GameManager.Instance.isPlaying = false;
     }
 
     public void RemoveTroll()
     {
+        audioS.PlayOneShot(miniGameDisappearing);
+
         gameObject.SetActive(false);
 
         activePopUps.Remove(this);

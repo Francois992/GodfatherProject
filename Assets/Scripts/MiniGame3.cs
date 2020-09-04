@@ -16,8 +16,11 @@ public class MiniGame3 : MiniGame
     private InputField inputPlayer;
     [SerializeField] 
     private GameObject LetterPrefab;
-    
 
+    [SerializeField]
+    private ShakeObject objectShaker;
+    [SerializeField]
+    private float timeHighlightWrong = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,8 @@ public class MiniGame3 : MiniGame
                 }
                 else
                 {
+                    //essai raté ! 
+                    objectShaker.ShakeThis(timeHighlightWrong);
                     EmptyPreviousNumber();
                     inputPlayer.text = "";
                     Debug.Log("No");
@@ -121,6 +126,8 @@ public class MiniGame3 : MiniGame
     private void GameWin()
     {
         Destroy(gameObject);
+
+        GameManager.Instance.AddAnger(-8);
 
         associatedTroll.OnMiniGameWin();
     }

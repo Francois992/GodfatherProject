@@ -45,12 +45,27 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public Canvas LooseScreen = null;
     [SerializeField] public Canvas WinScreen = null;
+    [SerializeField] public Canvas StoryScreen = null;
 
     public bool isPlaying = false;
+
+    [SerializeField] private float addedSaltValue1 = 1;
+    [SerializeField] private float addedSaltValue2 = 1.5f;
+    [SerializeField] private float addedSaltValue3 = 1.75f;
+    [SerializeField] private float addedSaltValue4 = 1.9f;
+    [SerializeField] private float addedSaltValue5= 2;
+
+    private AudioSource audioS;
+    [SerializeField] private AudioClip clickSound;
+
+    private bool isGamePlaying = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
+        HUD.Instance.gameObject.SetActive(false);
+
         LooseScreen.gameObject.SetActive(false);
         WinScreen.gameObject.SetActive(false);
         for (int i = 0; i < spawns.Length; i++)
@@ -65,26 +80,29 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-
-        for(int i  = 0; i < spawns.Length; i++)
+        if (isGamePlaying)
         {
-            if(spawns[i].spawnTime <= timer)
+            timer += Time.deltaTime;
+
+            for (int i = 0; i < spawns.Length; i++)
             {
-                if (!spawns[i].pop.isActivated)
+                if (spawns[i].spawnTime <= timer)
                 {
-                    spawns[i].pop.isActivated = true;
-                    spawns[i].pop.ActivateTroll();                
-                    spawns[i].pop.gameObject.SetActive(true);
+                    if (!spawns[i].pop.isActivated)
+                    {
+                        spawns[i].pop.isActivated = true;
+                        spawns[i].pop.ActivateTroll();
+                        spawns[i].pop.gameObject.SetActive(true);
+                    }
                 }
             }
-        }
 
-        if (PopUps.trolls.Count == 0) GameWin();
+            if (PopUps.trolls.Count == 0) GameWin();
 
-        if(anger >= angerMax)
-        {
-            GameOver();
+            if (anger >= angerMax)
+            {
+                GameOver();
+            }
         }
     }
 
@@ -107,11 +125,11 @@ public class GameManager : MonoBehaviour
     private void changeAddedValue(int value)
     {
         if (value == 0) addedAnger = 0;
-        else if (value == 1) addedAnger = 1;
-        else if (value == 2) addedAnger = 1.5f;
-        else if (value == 3) addedAnger = 1.75f;
-        else if (value == 4) addedAnger = 1.9f;
-        else addedAnger = 2f;
+        else if (value == 1) addedAnger = addedSaltValue1;
+        else if (value == 2) addedAnger = addedSaltValue2;
+        else if (value == 3) addedAnger = addedSaltValue3;
+        else if (value == 4) addedAnger = addedSaltValue4;
+        else addedAnger = addedSaltValue5;
     }
 
     private void GameOver()
@@ -129,6 +147,8 @@ public class GameManager : MonoBehaviour
 
         StopCoroutine(UpdateAnger());
 
+        HUD.Instance.gameObject.SetActive(false);
+
         LooseScreen.gameObject.SetActive(true);
     }
 
@@ -138,6 +158,8 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        HUD.Instance.gameObject.SetActive(false);
 
         WinScreen.gameObject.SetActive(true);
     }
@@ -159,6 +181,17 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame()
     {
+        audioS.PlayOneShot(clickSound);
         Application.Quit();
+    }
+
+    public void StartGame()
+    {
+        audioS.PlayOneShot(clickSound);
+        isGamePlaying = true;
+
+        StoryScreen.gameObject.SetActive(false);
+
+        HUD.Instance.gameObject.SetActive(true);
     }
 }

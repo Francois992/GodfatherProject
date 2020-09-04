@@ -25,6 +25,8 @@ public class TypingCtrl : MiniGame
     bool alreadyWon = false;
     float elapsedTime = 0;
 
+    [SerializeField] private float addedSalt = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +91,7 @@ public class TypingCtrl : MiniGame
                     StartCoroutine("FlashRed");
                     // la jauge de sel augmente de 5
 
-                    GameManager.Instance.AddAnger(5);
+                    GameManager.Instance.AddAnger(addedSalt);
 
                     //if (currentLine == phrases.Length)
                     //{
@@ -115,25 +117,6 @@ public class TypingCtrl : MiniGame
             }
             yield return new WaitForSeconds(0.1f);
             foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
-            {
-                child.GetChild(0).GetComponent<Text>().color = baseColor;
-            }
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-    IEnumerator FlashRed2()
-    {
-        while (elapsedTime < .8f)
-        {
-            Color baseColor = champDeSaisie.transform.GetChild(currentLine - 1).GetChild(0).GetChild(0).GetComponent<Text>().color;
-            foreach (Transform child in champDeSaisie.transform.GetChild(currentLine - 1))
-            {
-                Color red = new Color(255, 0, 0);
-                child.GetChild(0).GetComponent<Text>().color = red;
-            }
-            yield return new WaitForSeconds(0.1f);
-            foreach (Transform child in champDeSaisie.transform.GetChild(currentLine - 1))
             {
                 child.GetChild(0).GetComponent<Text>().color = baseColor;
             }
@@ -169,6 +152,8 @@ public class TypingCtrl : MiniGame
     private void GameWin()
     {
         Destroy(gameObject);
+
+        GameManager.Instance.AddAnger(-8);
 
         associatedTroll.OnMiniGameWin();
     }

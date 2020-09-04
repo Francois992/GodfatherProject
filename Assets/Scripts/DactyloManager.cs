@@ -48,6 +48,7 @@ public class DactyloManager : MiniGame
 
     private List<Text> letters = new List<Text>();
 
+    [SerializeField] private float addedSalt = 5;
 
     void Start()
     {
@@ -64,7 +65,7 @@ public class DactyloManager : MiniGame
         inputF.onValueChanged.AddListener(delegate { OnInputValueChange(); });
 
         // Au cas où le clique fasse perdre le focus, on le récupère
-        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3") || Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3") || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             inputF.Select();
             inputF.ActivateInputField();
@@ -217,6 +218,8 @@ public class DactyloManager : MiniGame
             if(!wrongAnswer)
                 StartCoroutine(DisplayLetterCaseBright());
 
+            GameManager.Instance.AddAnger(addedSalt);
+
             Debug.Log("NOPE");
         }
 
@@ -259,6 +262,8 @@ public class DactyloManager : MiniGame
     {
         // Do Something
         Destroy(gameObject);
+
+        GameManager.Instance.AddAnger(-8);
 
         associatedTroll.OnMiniGameWin();
 
