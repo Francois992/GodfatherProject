@@ -23,7 +23,7 @@ public class TypingCtrl : MiniGame
     int currentLine = 0;
     int linesWon = 0;
     bool alreadyWon = false;
-    float elapsedTime = 0;
+    float elapsedTime = 0; Color baseColor;
 
     [SerializeField] private float addedSalt = 5;
 
@@ -37,6 +37,8 @@ public class TypingCtrl : MiniGame
     {
         audioS = GetComponent<AudioSource>();
         LanceMinijeu();
+        baseColor = champDeSaisie.transform.GetChild(currentLine).GetChild(0).GetChild(1).GetComponent<Text>().color;
+        baseColor.a = 1f;
     }
 
     // Update is called once per frame
@@ -57,26 +59,36 @@ public class TypingCtrl : MiniGame
 
             if (!Input.GetKeyUp(KeyCode.Return))
             {
-                Color newColor = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
-                newColor.a = 1f;
-                champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color = newColor;
                 alreadyWon = false;
-                if (currentCase < champDeSaisie.transform.GetChild(currentLine).childCount - 1)
+                if (currentCase < champDeSaisie.transform.GetChild(currentLine).childCount)
                 {
+                    Color opaque = baseColor;
+                    opaque.a = 1f;
+                    champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color = opaque;
                     currentCase++;
                 }
                 else
                 {
-                    currentLine++;
                     currentCase = 0;
+                    foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
+                    {
+                        Color transparent = baseColor;
+                        transparent.a = 0f;
+                        child.GetChild(1).GetComponent<Text>().color = transparent;
+                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.Return))
             {
-                if (currentCase == 0 && currentLine > 0)
+                Debug.Log(currentCase);
+                Debug.Log(champDeSaisie.transform.GetChild(currentLine).childCount);
+                if (currentCase == champDeSaisie.transform.GetChild(currentLine).childCount)
                 {
                     if (!alreadyWon)
                     {
+                        currentLine++;
+                        currentCase = 0;
+
                         foreach (Transform child in champDeSaisie.transform.GetChild(currentLine - 1))
                         {
                             Color green = new Color(0, 255, 0);
@@ -120,12 +132,10 @@ public class TypingCtrl : MiniGame
     {
         while (elapsedTime < .8f)
         {
-            Color baseColor = champDeSaisie.transform.GetChild(currentLine).GetChild(0).GetChild(1).GetComponent<Text>().color;
             foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
             {
                 if (child.GetChild(1).GetComponent<Text>().color.a == 1f)
                 {
-
                     Color red = new Color(255, 0, 0);
                     child.GetChild(1).GetComponent<Text>().color = red;
                 }
@@ -135,7 +145,6 @@ public class TypingCtrl : MiniGame
             {
                 if (child.GetChild(1).GetComponent<Text>().color.a == 1f)
                 {
-
                     child.GetChild(1).GetComponent<Text>().color = baseColor;
                 }
             }
