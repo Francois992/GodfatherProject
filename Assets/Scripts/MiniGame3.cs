@@ -12,9 +12,9 @@ public class MiniGame3 : MiniGame
     private List<int> allNumbersArray = new List<int>();
     [SerializeField]
     private List<int> winOrders = new List<int>();
-    [SerializeField] 
+    [SerializeField]
     private InputField inputPlayer;
-    [SerializeField] 
+    [SerializeField]
     private GameObject LetterPrefab;
 
     [SerializeField]
@@ -33,21 +33,35 @@ public class MiniGame3 : MiniGame
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        //code brut pour evité des bug (peut etre largement amelioré juste pas le temps)
+        if (Input.GetKeyDown(KeyCode.Keypad1) ||
+            Input.GetKeyDown(KeyCode.Keypad2) ||
+            Input.GetKeyDown(KeyCode.Keypad3) ||
+            Input.GetKeyDown(KeyCode.Keypad4) ||
+            Input.GetKeyDown(KeyCode.Keypad5) ||
+            Input.GetKeyDown(KeyCode.Keypad6) ||
+            Input.GetKeyDown(KeyCode.Keypad7) ||
+            Input.GetKeyDown(KeyCode.Keypad8) ||
+            Input.GetKeyDown(KeyCode.Keypad9))
         {
+
+            // (Musique) il faudrait mettre un son de clavier ici 
             InstantiateNumberPlayer();
 
             if (inputPlayer.text.Length == 4)
             {
-                
+
                 if (winOrder == inputPlayer.text)
                 {
+                    //essai win
+                    // (Musique) il faudrait mettre un son de win je suppose 
                     Debug.Log("WIN!!");
-                    GameWin(); 
+                    GameWin();
                 }
                 else
                 {
                     //essai raté ! 
+                    // (Musique) il faudrait mettre un son de lose je suppose 
                     objectShaker.ShakeThis(timeHighlightWrong);
                     EmptyPreviousNumber();
                     inputPlayer.text = "";
@@ -61,9 +75,8 @@ public class MiniGame3 : MiniGame
                 inputPlayer.text = "";
             }
 
-            Debug.Log(inputPlayer.text);
         }
-        
+
         // Au cas où le clique fasse perdre le focus, on le récupère
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3") || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
@@ -118,16 +131,14 @@ public class MiniGame3 : MiniGame
     //permet de select automatiquement l'inputField
     private void AutoInputSelector()
     {
-            inputPlayer.Select();
-            inputPlayer.ActivateInputField();
+        inputPlayer.Select();
+        inputPlayer.ActivateInputField();
     }
 
 
     private void GameWin()
     {
         Destroy(gameObject);
-
-        GameManager.Instance.AddAnger(-8);
 
         associatedTroll.OnMiniGameWin();
     }
