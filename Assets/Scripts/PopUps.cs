@@ -110,7 +110,7 @@ public class PopUps : MonoBehaviour
     public void RemoveTroll()
     {
         audioS.PlayOneShot(miniGameCompleted);
-        StartCoroutine(PlayMiniGameDisappearingAfterSeconds(0.5f));
+        StartCoroutine(PlayMiniGameDisappearingAfterSeconds(0.15f));
     }
 
     IEnumerator PlayMiniGameDisappearingAfterSeconds(float time)

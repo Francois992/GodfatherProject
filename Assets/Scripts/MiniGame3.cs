@@ -163,7 +163,7 @@ public class MiniGame3 : MiniGame
 
     private void GameWin()
     {
-        Destroy(gameObject, 0.7f);
+        Destroy(gameObject, 0.3f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 

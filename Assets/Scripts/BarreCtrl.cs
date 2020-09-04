@@ -19,6 +19,8 @@ public class BarreCtrl : MiniGame
     [SerializeField] private Sprite SpaceBarPressed;
     [SerializeField] private Sprite SpaceBarUnPressed;
 
+    private bool isGameWin = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,13 +65,17 @@ public class BarreCtrl : MiniGame
             Debug.Log("le minijeu est fini");
             // revenir au jeu principal
 
-            GameWin();
+            if (!isGameWin)
+            {
+                GameWin();
+                isGameWin = true;
+            }
         }
     }
 
     private void GameWin()
     {
-        Destroy(gameObject, 0.7f);
+        Destroy(gameObject, 0.3f);
 
         GameManager.Instance.AddAnger(GameManager.Instance.removedSaltValue);
 
