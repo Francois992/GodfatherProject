@@ -23,7 +23,7 @@ public class TypingCtrl : MiniGame
     int currentLine = 0;
     int linesWon = 0;
     bool alreadyWon = false;
-    float elapsedTime = 0;
+    float elapsedTime = 0; Color baseColor;
 
     [SerializeField] private float addedSalt = 5;
 
@@ -37,6 +37,8 @@ public class TypingCtrl : MiniGame
     {
         audioS = GetComponent<AudioSource>();
         LanceMinijeu();
+        baseColor = champDeSaisie.transform.GetChild(currentLine).GetChild(0).GetChild(1).GetComponent<Text>().color;
+        baseColor.a = 1f;
     }
 
     // Update is called once per frame
@@ -60,7 +62,7 @@ public class TypingCtrl : MiniGame
                 alreadyWon = false;
                 if (currentCase < champDeSaisie.transform.GetChild(currentLine).childCount)
                 {
-                    Color opaque = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
+                    Color opaque = baseColor;
                     opaque.a = 1f;
                     champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color = opaque;
                     currentCase++;
@@ -70,7 +72,7 @@ public class TypingCtrl : MiniGame
                     currentCase = 0;
                     foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
                     {
-                        Color transparent = champDeSaisie.transform.GetChild(currentLine).GetChild(currentCase).GetChild(1).GetComponent<Text>().color;
+                        Color transparent = baseColor;
                         transparent.a = 0f;
                         child.GetChild(1).GetComponent<Text>().color = transparent;
                     }
@@ -130,12 +132,10 @@ public class TypingCtrl : MiniGame
     {
         while (elapsedTime < .8f)
         {
-            Color baseColor = champDeSaisie.transform.GetChild(currentLine).GetChild(0).GetChild(1).GetComponent<Text>().color;
             foreach (Transform child in champDeSaisie.transform.GetChild(currentLine))
             {
                 if (child.GetChild(1).GetComponent<Text>().color.a == 1f)
                 {
-
                     Color red = new Color(255, 0, 0);
                     child.GetChild(1).GetComponent<Text>().color = red;
                 }
@@ -145,7 +145,6 @@ public class TypingCtrl : MiniGame
             {
                 if (child.GetChild(1).GetComponent<Text>().color.a == 1f)
                 {
-
                     child.GetChild(1).GetComponent<Text>().color = baseColor;
                 }
             }
